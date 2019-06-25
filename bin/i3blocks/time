@@ -53,7 +53,7 @@ if (!exists $display_map{$ENV{TZ}}) {
     $ENV{TZ} = $tz_list[0];
     set_tz($tz_list[0]);
 }
-$tz_display = $display_map{$ENV{TZ}};
+#$tz_display = $display_map{$ENV{TZ}};
 
 my $time = strftime($format, localtime());
 if ($tz_display eq "") {
