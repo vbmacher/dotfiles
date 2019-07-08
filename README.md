@@ -8,6 +8,7 @@ To install:
 - neovim
 - (neovim) vim-plug:  `curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim`
 - (classic vim): https://github.com/VundleVim/Vundle.vim
+- acpi, sysstat, gcalcli
 
 To clone:
 
