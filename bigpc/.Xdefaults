@@ -1,0 +1,70 @@
+Xft.autohint: 1
+Xft.lcdfilter: lcddefault
+Xft.hintstyle: hintsfull
+Xft.hinting: 1
+Xft.antialias: 1
+!Xft.rgba: rgb
+
+! urxvt
+
+!URrxvt.font:            xft:Inconsolata:pixelsize=25:autohint=true:antialias=true
+!URxvt.boldFont:         xft:Inconsolata:bold:size=25:autohint=true:antialias=true
+!URxvt.italicFont:       xft:Inconsolata:italic:size=25:autohint=true:antialias=true
+
+!Xft.autohint: 0
+!Xft.lcdfilter: lcddefault
+!Xft.hintstyle: hintslight
+!Xft.hinting: 1
+!Xft.antialias: 1
+!Xft.rgba: rgb
+
+urxvt.font:             xft:Bitstream Vera Sans Mono:pixelsize=15:autohint=true:antialias=false
+urxvt.boldFont:         xft:Bitstream Vera Sans Mono:bold:size=15:autohint=true:antialias=false
+urxvt.italicFont:       xft:Bitstream Vera Sans Mono:italic:size=15:autohint=true:antialias=false
+
+
+
+URxvt.termName:         rxvt
+URxvt.background:       #000000
+URxvt.foreground:       #cccccc
+URxvt.scrollBar:        false
+
+! URxvt.perl-ext-common:  default,matcher,font-size
+URxvt.url-launcher:     firefox-wayland
+URxvt.matcher.button:   1
+
+URxvt.fading:           30
+URxvt.fadeColor:        #000000
+URxvt.dynamicColors:    on
+URxvt.depth:        32
+
+URxvt.saveLines:        1000
+
+URxvt.transparent:   false
+URxvt.tintColor:     black
+
+URxvt.keysym.C-Up:     perl:font-size:increase
+URxvt.keysym.C-Down:   perl:font-size:decrease
+URxvt.keysym.C-S-Up:   perl:font-size:incglobal
+URxvt.keysym.C-S-Down: perl:font-size:decglobal
+
+URxvt.iso14755: false
+URxvt.iso14755_52: false
+
+URxvt.color0:      #000000
+URxvt.color1:      #9e1828
+URxvt.color2:      #aece92
+URxvt.color3:      #968a38
+URxvt.color4:      #414171
+URxvt.color5:      #963c59
+URxvt.color6:      #418179
+URxvt.color7:      #bebebe
+URxvt.color8:      #666666
+URxvt.color9:      #cf6171
+URxvt.color10:     #c5f779
+URxvt.color11:     #fff796
+URxvt.color12:     #4186be
+URxvt.color13:     #cf9ebe
+URxvt.color14:     #71bebe
+URxvt.color15:     #ffffff
+
