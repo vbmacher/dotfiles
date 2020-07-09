@@ -1,39 +1,17 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-# This script is a simple wrapper which prefixes each i3status line with custom
-# information. It is a python reimplementation of:
-# http://code.stapelberg.de/git/i3status/tree/contrib/wrapper.pl
-#
-# To use it, ensure your ~/.i3status.conf contains this line:
-#     output_format = "i3bar"
-# in the 'general' section.
-# Then, in your ~/.i3/config, use:
-#     status_command i3status | ~/i3status/contrib/wrapper.py
-# In the 'bar' section.
-#
-# In its current version it will display the cpu frequency governor, but you
-# are free to change it to display whatever you like, see the comment in the
-# source code below.
-#
-# © 2012 Valentin Haenel <valentin.haenel@gmx.de>
-#
-# This program is free software. It comes without any warranty, to the extent
-# permitted by applicable law. You can redistribute it and/or modify it under
-# the terms of the Do What The Fuck You Want To Public License (WTFPL), Version
-# 2, as published by Sam Hocevar. See http://sam.zoy.org/wtfpl/COPYING for more
-# details.
-
 import sys
 import json
 import subprocess
 import random
 
-def get_next_meeting():
-    work = subprocess.check_output("gcalcli --nocolor --nostarted agenda | head -2 | tail -1", 
+
+def get_jumpshot_agenda():
+    work = subprocess.check_output("gcalcli --nocolor --configFolder ~/.gcalcli-js agenda --nostarted | head -2 | tail -1", 
             shell=True).rstrip()
 
-    attendees = subprocess.check_output("gcalcli --nocolor --nostarted --detail_attendees -w 200 agenda", shell=True).rstrip()
+    attendees = subprocess.check_output("gcalcli --nocolor --configFolder ~/.gcalcli-js agenda --nostarted --detail_attendees -w 200", shell=True).rstrip()
     attendees = attendees.split("\n")
 
     if (len(attendees) > 3):
@@ -56,11 +34,16 @@ def get_next_meeting():
 
         if (len(rooms) > 0):
           work = work + " (" + ','.join(str(e) for e in rooms) + ")"
+    return work
 
-    perso = subprocess.check_output("gcalcli --nocolor --nostarted --configFolder ~/.gcalcli-perso agenda | head -2 | tail -1", 
+def get_personal_agenda():
+    return subprocess.check_output("gcalcli --nocolor agenda --nostarted --nodeclined | head -2 | tail -1", 
             shell=True).rstrip()
 
-    return work + ' | ' + perso
+
+def get_agenda():
+    #return get_jumpshot_agenda() + ' | ' + get_personal_agenda()
+    return get_personal_agenda()
 
 def print_line(message):
     """ Non-buffered printing to stdout. """
@@ -81,23 +64,6 @@ def read_line():
         sys.exit()
 
 if __name__ == '__main__':
-    # Skip the first line which contains the version header.
-#    print_line(read_line())
+  agenda = get_agenda().decode()
+  print_line("{\"full_text\" : \"%s\"" % agenda + ",\"short_text\" : \"agenda\"}")
 
-    # The second line contains the start of the infinite array.
-#    print_line(read_line())
-
-#    while True:
-#        line, prefix = read_line(), ''
-        # ignore comma at start of lines
-#        if line.startswith(','):
-#            line, prefix = line[1:], ','
-
-#        j = json.loads(line)
-        # insert information into the start of the json, but could be anywhere
-        # CHANGE THIS LINE TO INSERT SOMETHING ELSE
-        #j.insert(0, {'full_text' : '%s' % get_governor(), 'name' : 'gov'})
-
-        # and echo back new encoded json
-#        print_line(prefix+json.dumps(j))
-  print_line("{\"full_text\" : \"%s\"" % get_next_meeting() + ",\"short_text\" : \"agenda\"}")
