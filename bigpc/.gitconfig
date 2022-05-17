@@ -3,3 +3,5 @@
 	name = Peter Jakubco
 [push]
 	default = current
+[core]
+	editor = vim

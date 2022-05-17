@@ -11,13 +11,22 @@ if ! [[ "$PATH" =~ "$HOME/.local/bin:$HOME/bin:" ]]
 then
     PATH="$HOME/.local/bin:$HOME/bin:$PATH"
 fi
-PATH="/opt/robo3t/bin:/opt/Discord:$PATH"
 export PATH
 
 # Uncomment the following line if you don't like systemctl's auto-paging feature:
 # export SYSTEMD_PAGER=
 
 # User specific aliases and functions
+if [ -d ~/.bashrc.d ]; then
+	for rc in ~/.bashrc.d/*; do
+		if [ -f "$rc" ]; then
+			. "$rc"
+		fi
+	done
+fi
+
+unset rc
+
 if [ -f "$HOME/.bash-git-prompt/gitprompt.sh" ]; then
    # Set config variables first
    GIT_PROMPT_ONLY_IN_REPO=1
@@ -44,9 +53,3 @@ if [ -f "$HOME/.bash-git-prompt/gitprompt.sh" ]; then
     source $HOME/.bash-git-prompt/gitprompt.sh
 fi
 
-
-#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
-export SDKMAN_DIR="/home/vbmacher/.sdkman"
-[[ -s "/home/vbmacher/.sdkman/bin/sdkman-init.sh" ]] && source "/home/vbmacher/.sdkman/bin/sdkman-init.sh"
-
-export XDG_RUNTIME_DIR=/run/user/$(id -u)
